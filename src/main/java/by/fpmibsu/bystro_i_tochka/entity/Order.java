@@ -4,14 +4,24 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-    public static void Main(){
-        System.out.printf("zhopa");
+
+    private User user;
+    private int id;
+
+    private Date date;
+
+    private List<Food> order;
+
+    public Order(User user, int id, Date date, List<Food> order) {
+        this.user = user;
+        this.id = id;
+        this.date = date;
+        this.order = order;
     }
 
-    User user;
-    int id;
+    public Order() {
+        this.user = new User();
+        this.date = new Date();
+    }
 
-    Date date;
-
-    List<Food> order;
 }
