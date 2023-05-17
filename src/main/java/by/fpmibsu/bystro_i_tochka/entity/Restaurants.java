@@ -1,11 +1,7 @@
 package by.fpmibsu.bystro_i_tochka.entity;
 
-import jdk.vm.ci.meta.Local;
-
 import java.time.DayOfWeek;
-import java.util.Calendar;
-import java.time.LocalTime;
-import java.time.LocalDate;
+import java.time.LocalTime;;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
