@@ -1,19 +1,21 @@
 package by.fpmibsu.bystro_i_tochka.DAO;
+
+import by.fpmibsu.bystro_i_tochka.entity.Food;
+import by.fpmibsu.bystro_i_tochka.entity.User;
+import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import by.fpmibsu.bystro_i_tochka.entity.Address;
-import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
-
-public interface BaseAddressDAO{
-    List<Address> findAll() throws DaoException;
-    Address findEntityById(int id) throws DaoException;
-    boolean delete(Address t) throws DaoException;
+public interface BaseUserDAO {
+    List<User> findAll() throws DaoException;
+    User findEntityById(int id) throws DaoException;
+    boolean delete(User t) throws DaoException;
     boolean delete(int id) throws DaoException;
-    boolean create(Address t) throws DaoException;
-    void update(Address country,int id,String street,int house, int flatnumber) throws DaoException;
+    boolean create(User t) throws DaoException;
+    void update(User country,int id,String name, String login, String password) throws DaoException;
     default void close(Statement statement) {
         try {
             if (statement != null) {

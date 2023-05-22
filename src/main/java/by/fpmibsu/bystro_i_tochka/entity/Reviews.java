@@ -1,8 +1,10 @@
 package by.fpmibsu.bystro_i_tochka.entity;
 
 public class Reviews {
-    public Reviews(User user, Food food, int id) {
+    public Reviews(User user, String comment, int mark, Food food, int id) {
         this.user = user;
+        this.comment = comment;
+        this.mark = mark;
         this.food = food;
         this.id = id;
     }
@@ -38,8 +40,26 @@ public class Reviews {
 
     private User user;
 
+    private String comment;
+    private int mark;
+
     private Food food;
 
     private int id;
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public int getMark() {
+        return mark;
+    }
+
+    public void setMark(int mark) {
+        this.mark = mark;
+    }
 }

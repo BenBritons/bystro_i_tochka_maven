@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressDao implements BaseAddressDAO {
+public class AddressDAO implements BaseAddressDAO {
 
     private static final String SQL_SELECT_ALL_ADDRESS =
             "SELECT * FROM address";
@@ -20,6 +20,9 @@ public class AddressDao implements BaseAddressDAO {
 
     private static final String SQL_CREATE_ADDRESS =
             "INSERT INTO address(STREET,HOUSE,FLATNUMBER) VALUES(?,?,?)";
+
+    private static final String SQL_UPDATE_ADDRESS =
+            "UPDATE address SET STREET=?,HOUSE=?,FLATNUMBER=? WHERE ID=?";
 
     private Connection connection = null;
     private Statement statement = null;
@@ -125,9 +128,31 @@ public class AddressDao implements BaseAddressDAO {
     }
 
     @Override
-    public Address update(Address t) throws DaoException {
-        return null;
+    public void update(Address country, int id, String street, int house, int flatnumber) throws DaoException {
+        if (country == null) return;
+        try{
+            connection = ConnectionCreator.createConnection();
+            preparedStatement = connection.prepareStatement(SQL_UPDATE_ADDRESS);
+            preparedStatement.setString(1,street);
+            preparedStatement.setInt(2,house);
+            preparedStatement.setInt(3,flatnumber);
+            preparedStatement.setLong(4,country.getId());
+            int rowAffected = preparedStatement.executeUpdate();
+            if (rowAffected == 1){
+                country.setFlatNumber(flatnumber);
+                country.setStreet(street);
+                country.setHouse(house);
+            }
+        } catch (SQLException e){
+            throw new DaoException(e);
+        }
+        finally {
+            close(preparedStatement);
+            close(connection);
+        }
+
     }
+
 
     @Override
     public void close(Statement statement) {

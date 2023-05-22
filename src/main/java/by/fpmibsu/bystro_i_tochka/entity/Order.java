@@ -1,5 +1,6 @@
 package by.fpmibsu.bystro_i_tochka.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -7,9 +8,25 @@ public class Order {
 
     private User user;
     private int id;
-    private int addressID;
-
+    private Address address;
+    private ArrayList<Food> order;
     private Date date;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Order(User user, int id, Address address, ArrayList<Food> order, Date date) {
+        this.user = user;
+        this.id = id;
+        this.address = address;
+        this.order = order;
+        this.date = date;
+    }
 
     public User getUser() {
         return user;
@@ -27,13 +44,6 @@ public class Order {
         this.id = id;
     }
 
-    public int getAddressID() {
-        return addressID;
-    }
-
-    public void setAddressID(int addressID) {
-        this.addressID = addressID;
-    }
 
     public Date getDate() {
         return date;
@@ -47,16 +57,13 @@ public class Order {
         return order;
     }
 
-    public void setOrder(List<Food> order) {
+    public void setOrder(ArrayList<Food> order) {
         this.order = order;
     }
 
-    private List<Food> order;
-
-    public Order(User user, int id, int addressID, Date date, List<Food> order) {
+    public Order(User user, int id, int addressID, Date date, ArrayList<Food> order) {
         this.user = user;
         this.id = id;
-        this.addressID = addressID;
         this.date = date;
         this.order = order;
     }

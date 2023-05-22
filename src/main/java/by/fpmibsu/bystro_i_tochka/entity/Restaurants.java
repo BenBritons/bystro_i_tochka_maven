@@ -8,13 +8,15 @@ import java.util.Set;
 
 public class Restaurants {
 
-    public Restaurants(Address location, LocalTime workTimeStart, LocalTime workTimeEnd) {
+    public Restaurants(int id, Address location, LocalTime workTimeStart, LocalTime workTimeEnd) {
+        this.id = id;
         this.location = location;
         this.workTimeStart = workTimeStart;
         this.workTimeEnd = workTimeEnd;
     }
 
-    public Restaurants(Address location, LocalTime workTimeStart, LocalTime workTimeEnd, DayOfWeek...weekendDays) {
+    public Restaurants(int id, Address location, LocalTime workTimeStart, LocalTime workTimeEnd, DayOfWeek...weekendDays) {
+        this.id = id;
         this.location = location;
         this.workTimeStart = workTimeStart;
         this.workTimeEnd = workTimeEnd;
@@ -23,8 +25,12 @@ public class Restaurants {
     }
 
 
-    public Restaurants() {
+    public Restaurants(int id) {
+        this.id = id;
         this.location = new Address();
+    }
+    public Restaurants() {
+
     }
 
     public Address getLocation() {
@@ -51,18 +57,27 @@ public class Restaurants {
         this.workTimeEnd = workTimeEnd;
     }
 
-    public Set<DayOfWeek> getWeekends() {
+    public HashSet<DayOfWeek> getWeekends() {
         return weekends;
     }
 
-    public void setWeekends(Set<DayOfWeek> weekends) {
+    public void setWeekends(HashSet<DayOfWeek> weekends) {
         this.weekends = weekends;
     }
 
+    private int id;
     private Address location;
 
     private LocalTime workTimeStart;
     private LocalTime workTimeEnd;
 
-    private Set<DayOfWeek> weekends;
+    private HashSet<DayOfWeek> weekends;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

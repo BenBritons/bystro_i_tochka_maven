@@ -11,6 +11,7 @@ public class User {
     public User() {
         this.name = "";
         this.login = "";
+        this.password = "";
     }
 
     public void setName(String name) {
@@ -39,6 +40,10 @@ public class User {
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     private String name;
