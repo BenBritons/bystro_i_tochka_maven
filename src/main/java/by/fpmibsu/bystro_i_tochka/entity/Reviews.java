@@ -9,6 +9,13 @@ public class Reviews {
         this.id = id;
     }
 
+    public Reviews(User user, String comment, int mark, Food food) {
+        this.user = user;
+        this.comment = comment;
+        this.mark = mark;
+        this.food = food;
+    }
+
     public Reviews() {
         this.user = new User();
         this.food = new Food();

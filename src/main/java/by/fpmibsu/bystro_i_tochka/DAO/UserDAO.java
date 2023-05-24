@@ -97,7 +97,21 @@ public class UserDAO implements BaseUserDAO{
 
     @Override
     public boolean delete(int id) throws DaoException {
-        throw new  UnsupportedOperationException();
+        try{
+            connection = ConnectionCreator.createConnection();
+            preparedStatement = connection.prepareStatement(SQL_DELETE_ADDRESS);
+            preparedStatement.setLong(1,id);
+            int rows = preparedStatement.executeUpdate();
+            if (rows == 1) return true;
+        } catch(SQLException e){
+            throw new DaoException(e);
+        }
+        finally{
+            close(preparedStatement);
+            close(connection);
+        }
+
+        return false;
     }
 
     @Override
