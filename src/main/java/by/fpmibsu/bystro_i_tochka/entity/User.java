@@ -1,6 +1,16 @@
 package by.fpmibsu.bystro_i_tochka.entity;
 
 public class User {
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
     public User(String name, String login, String password, int id) {
         this.name = name;
         this.login = login;

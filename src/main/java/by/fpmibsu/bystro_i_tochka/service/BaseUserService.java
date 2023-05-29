@@ -9,4 +9,5 @@ public interface BaseUserService {
     boolean login(String login, String password) throws DaoException;
     void deleteUser(int userId) throws DaoException;
     void deleteUser(User user) throws DaoException;
+    public void update(User country, int id, String name, String login, String password) throws DaoException;
 }

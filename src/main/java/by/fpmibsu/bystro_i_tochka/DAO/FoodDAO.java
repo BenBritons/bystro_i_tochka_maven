@@ -2,6 +2,9 @@ package by.fpmibsu.bystro_i_tochka.DAO;
 
 import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
+import by.fpmibsu.bystro_i_tochka.service.UserServiceImpl;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -114,7 +117,7 @@ public class FoodDAO implements BaseFoodDAO {
                 return true;
             }
         } catch(SQLException e){
-            throw new DaoException(e);
+            LogManager.getLogger(FoodDAO.class.getName()).log(Level.ERROR, "existing food");
         }
         finally{
             close(preparedStatement);

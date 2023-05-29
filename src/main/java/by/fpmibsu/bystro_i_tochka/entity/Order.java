@@ -16,6 +16,7 @@ public class Order {
         return address;
     }
 
+
     public void setAddress(Address address) {
         this.address = address;
     }
@@ -53,7 +54,7 @@ public class Order {
         this.date = date;
     }
 
-    public List<Food> getOrder() {
+    public ArrayList<Food> getOrder() {
         return order;
     }
 
