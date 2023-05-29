@@ -47,8 +47,8 @@ public class UserServiceImpl implements BaseUserService{
     }
 
     @Override
-    public void update(User country, int id, String name, String login, String password) throws DaoException {
-        dao.update(country, id, name, login, password);
+    public void update(User country, int id, String name, String login, String password, boolean admin) throws DaoException {
+        dao.update(country, id, name, login, password, admin);
         logger.log(Level.INFO, "user updated " + country.toString());
     }
 }

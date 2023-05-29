@@ -15,7 +15,7 @@ public interface BaseUserDAO {
     boolean delete(User t) throws DaoException;
     boolean delete(int id) throws DaoException;
     boolean create(User t) throws DaoException;
-    void update(User country,int id,String name, String login, String password) throws DaoException;
+    void update(User country,int id,String name, String login, String password, boolean admin) throws DaoException;
     default void close(Statement statement) {
         try {
             if (statement != null) {

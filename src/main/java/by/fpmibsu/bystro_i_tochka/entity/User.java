@@ -3,6 +3,7 @@ package by.fpmibsu.bystro_i_tochka.entity;
 public class User {
     @Override
     public String toString() {
+
         return "User{" +
                 "name='" + name + '\'' +
                 ", login='" + login + '\'' +
@@ -10,8 +11,10 @@ public class User {
                 ", id=" + id +
                 '}';
     }
+    private boolean admin;
 
-    public User(String name, String login, String password, int id) {
+    public User(boolean admin, String name, String login, String password, int id) {
+        this.admin = admin;
         this.name = name;
         this.login = login;
         this.password = password;
@@ -69,4 +72,12 @@ public class User {
     private String password;
 
     private int id;
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
+    }
 }

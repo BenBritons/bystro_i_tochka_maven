@@ -20,10 +20,10 @@ public class UserDAO implements BaseUserDAO{
             "DELETE FROM users WHERE ID=?";
 
     private static final String SQL_CREATE_ADDRESS =
-            "INSERT INTO users(NAME,LOGIN,PASS) VALUES(?,?,?)";
+            "INSERT INTO users(NAME,LOGIN,PASS,IS_ADMIN) VALUES(?,?,?,?)";
 
     private static final String SQL_UPDATE_ADDRESS =
-            "UPDATE users SET NAME=?,LOGIN=?,PASS=? WHERE ID=?";
+            "UPDATE users SET NAME=?,LOGIN=?,PASS=?,IS_ADMIN=? WHERE ID=?";
 
     private Connection connection = null;
     private Statement statement = null;
@@ -44,6 +44,7 @@ public class UserDAO implements BaseUserDAO{
                 abonent.setName(resultSet.getString("NAME"));
                 abonent.setLogin(resultSet.getString("LOGIN"));
                 abonent.setPassword(resultSet.getString("PASS"));
+                abonent.setAdmin(resultSet.getBoolean("IS_ADMIN"));
                 abonents.add(abonent);
             }
         } catch (SQLException e) {
@@ -123,6 +124,7 @@ public class UserDAO implements BaseUserDAO{
             preparedStatement.setString(1,t.getName());
             preparedStatement.setString(2,t.getLogin());
             preparedStatement.setString(3,t.getPassword());
+            preparedStatement.setBoolean(4,t.isAdmin());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -142,7 +144,7 @@ public class UserDAO implements BaseUserDAO{
     }
 
     @Override
-    public void update(User country, int id, String name, String login, String password) throws DaoException {
+    public void update(User country, int id, String name, String login, String password, boolean admin) throws DaoException {
         if (country == null) return;
         try{
             connection = ConnectionCreator.createConnection();
@@ -150,12 +152,14 @@ public class UserDAO implements BaseUserDAO{
             preparedStatement.setString(1,name);
             preparedStatement.setString(2,login);
             preparedStatement.setString(3,password);
-            preparedStatement.setInt(4,country.getId());
+            preparedStatement.setBoolean(4,country.isAdmin());
+            preparedStatement.setInt(5,country.getId());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 country.setName(name);
                 country.setLogin(login);
                 country.setPassword(password);
+                country.setAdmin(admin);
             }
         } catch (SQLException e){
             throw new DaoException(e);
@@ -176,6 +180,7 @@ public class UserDAO implements BaseUserDAO{
             country.setName(resultSet.getString(2));
             country.setLogin(resultSet.getString(3));
             country.setPassword(resultSet.getString(4));
+            country.setAdmin(resultSet.getBoolean(5));
             countries.add(country);
         }
         return countries;
