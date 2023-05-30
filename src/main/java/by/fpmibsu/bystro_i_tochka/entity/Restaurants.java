@@ -4,7 +4,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Set;
 
 public class Restaurants {
 
@@ -15,9 +14,10 @@ public class Restaurants {
         this.workTimeEnd = workTimeEnd;
     }
 
-    public Restaurants(int id, Address location, LocalTime workTimeStart, LocalTime workTimeEnd, DayOfWeek...weekendDays) {
+    public Restaurants(int id, Address location, String name, LocalTime workTimeStart, LocalTime workTimeEnd, DayOfWeek...weekendDays) {
         this.id = id;
         this.location = location;
+        this.name = name;
         this.workTimeStart = workTimeStart;
         this.workTimeEnd = workTimeEnd;
         this.weekends = new HashSet<>();
@@ -67,6 +67,7 @@ public class Restaurants {
 
     private int id;
     private Address location;
+    private String name;
 
     private LocalTime workTimeStart;
     private LocalTime workTimeEnd;
@@ -79,5 +80,13 @@ public class Restaurants {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

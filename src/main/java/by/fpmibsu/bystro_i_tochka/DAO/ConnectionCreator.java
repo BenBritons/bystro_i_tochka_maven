@@ -10,7 +10,7 @@ public class ConnectionCreator {
     private static final String DATABASE_URL;
     static {
         try {
-            properties.load(new FileReader("src/main/resources/database.properties"));
+            properties.load(new FileReader("C:\\Users\\ivanl\\IdeaProjects\\bystro_i_tochka_maven\\src\\main\\resources\\database.properties"));
             String driverName = (String) properties.get("db.driver");
             Class.forName(driverName);
         } catch (ClassNotFoundException | IOException e) {

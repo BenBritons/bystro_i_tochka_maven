@@ -47,7 +47,7 @@ public class RestaurantsServiceImpl implements BaseRestaurantsService{
     }
 
     @Override
-    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends) throws DaoException {
-        dao.update(country, id, address, workTimeStart, workTimeEnd, weekends);
+    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException {
+        dao.update(country, id, address, workTimeStart, workTimeEnd, weekends, name);
     }
 }

@@ -11,17 +11,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public interface BaseRestaurantsDAO {
-    List<Restaurants> findAll() throws DaoException;
+    ArrayList<Restaurants> findAll() throws DaoException;
     Restaurants findEntityById(int id) throws DaoException;
     boolean delete(Restaurants t) throws DaoException;
     boolean delete(int id) throws DaoException;
     boolean create(Restaurants t) throws DaoException;
-    void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends) throws DaoException;
+    void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException;
     default void close(Statement statement) {
         try {
             if (statement != null) {

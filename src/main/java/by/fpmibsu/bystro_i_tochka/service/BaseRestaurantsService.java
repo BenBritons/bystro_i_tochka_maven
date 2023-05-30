@@ -16,6 +16,6 @@ public interface BaseRestaurantsService {
     boolean delete(Restaurants t) throws DaoException;
     boolean delete(int id) throws DaoException;
     boolean create(Restaurants t) throws DaoException;
-    void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends) throws DaoException;
+    void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException;
 
 }

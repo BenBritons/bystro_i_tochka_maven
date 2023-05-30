@@ -2,6 +2,7 @@ package by.fpmibsu.bystro_i_tochka.DAO;
 
 import by.fpmibsu.bystro_i_tochka.entity.Address;
 import by.fpmibsu.bystro_i_tochka.entity.Food;
+import by.fpmibsu.bystro_i_tochka.entity.Promos;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
@@ -26,18 +27,34 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             "DELETE FROM restaurants WHERE ID=?";
 
     private static final String SQL_CREATE_FOOD =
-            "INSERT INTO restaurants(ADDRESS_ID,TIME_START,TIME_END,WEEKENDS) VALUES(?,?,?,?)";
+            "INSERT INTO restaurants(ADDRESS_ID,TIME_START,TIME_END,WEEKENDS,NAME) VALUES(?,?,?,?,?)";
 
     private static final String SQL_UPDATE_FOOD =
-            "UPDATE restaurants SET ADDRESS_ID=?,TIME_START=?,TIME_END=?,WEEKENDS=? WHERE ID=?";
+            "UPDATE restaurants SET ADDRESS_ID=?,TIME_START=?,TIME_END=?,WEEKENDS=?,NAME=? WHERE ID=?";
 
     private Connection connection = null;
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
 
     @Override
-    public List<Restaurants> findAll() throws DaoException {
-        throw new  UnsupportedOperationException();
+    public ArrayList<Restaurants> findAll() throws DaoException {
+        ArrayList<Restaurants> abonents = new ArrayList<>();
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = ConnectionCreator.createConnection();
+            statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
+            abonents.addAll(loadFromResultSet(resultSet));
+            System.out.println("AAAAAAAAAAAAAAA");
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            close(statement);
+            close(connection);
+        }
+
+        return abonents;
     }
 
     @Override
@@ -114,6 +131,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
                 str.append(tmp.getValue());
             }
             preparedStatement.setString(4, str.toString());
+            preparedStatement.setString(5, t.getName());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -133,7 +151,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     }
 
     @Override
-    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends) throws DaoException {
+    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException {
         if (country == null) return;
         try{
             connection = ConnectionCreator.createConnection();
@@ -147,12 +165,14 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
                 str.append(tmp.getValue());
             }
             preparedStatement.setString(4,str.toString());
+            preparedStatement.setString(5,name);
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 country.setWeekends(weekends);
                 country.setWorkTimeStart(workTimeStart);
                 country.setWorkTimeEnd(workTimeEnd);
                 country.setLocation(address);
+                country.setName(name);
             }
         } catch (SQLException e){
             throw new DaoException(e);
@@ -175,6 +195,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             country.setWorkTimeStart(resultSet.getTime(3).toLocalTime());
             country.setWorkTimeEnd(resultSet.getTime(4).toLocalTime());
             country.setWeekends(parseString(resultSet.getString(5)));
+            country.setName(resultSet.getString(6));
             countries.add(country);
         }
         return countries;
