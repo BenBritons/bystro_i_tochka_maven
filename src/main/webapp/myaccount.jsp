@@ -53,6 +53,32 @@
             <p id="password"></p>
           </div>
     </div>
+
+    <div class="account-details">
+        <!-- Остальные элементы аккаунта -->
+        <div class="add-restaurant-button">
+          <button id="add-restaurant-btn">Добавить ресторан</button>
+        </div>
+      </div>
+
+      <%
+
+boolean isAdmin = ...; 
+
+String accountDetailsClass = isAdmin ? "account-details admin" : "account-details";
+%>
+
+<script>
+    var isAdmin = document.querySelector(".account-details").classList.contains("admin");
+  
+    var addRestaurantBtn = document.getElementById("add-restaurant-btn");
+
+    if (isAdmin) {
+      addRestaurantBtn.style.display = "block";
+    } else {
+      addRestaurantBtn.style.display = "none";
+    }
+  </script>
   </main>
 
   <footer class="bg-light text-center p-3 mt-4">
