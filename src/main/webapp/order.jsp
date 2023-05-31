@@ -55,26 +55,19 @@
         </div>
         <h2>Меню</h2>
         <div class="menu-items">
-          <%ArrayList<Food> restaurants = (ArrayList<Food>) request.getAttribute("rest_food_list");%>
-          <%=restaurants.size()%>
+          <%
+            ArrayList<Food> restaurants = (ArrayList<Food>) request.getAttribute("rest_food_list");
+            for(Food t : restaurants){%>
           <div class="menu-item">
             <img src="../bystro_i_tochka_maven/src/main/webapp/images/pizza.jpg" alt="Пицца Маргарита" class="menu-item-image">
             <div class="menu-item-details">
-              <h3>Пицца Маргарита</h3>
+              <h3><%=t.getName()%></h3>
               <p>Состав: томатный соус, моцарелла, базилик</p>
-              <p>Цена: $10</p>
+              <p>Цена: $<%=t.getPrice()%></p>
               <button class="btn btn-primary add-to-cart">Добавить в корзину</button>
             </div>
           </div>
-          <div class="menu-item">
-            <img src="../bystro_i_tochka_maven/src/main/webapp/images/sushi.jpg" alt="Суши с лососем" class="menu-item-image">
-            <div class="menu-item-details">
-              <h3>Суши с лососем</h3>
-              <p>Состав: рис, лосось, огурец</p>
-              <p>Цена: $12</p>
-              <button class="btn btn-primary add-to-cart">Добавить в корзину</button>
-            </div>
-          </div>
+          <%}%>
           <!-- Добавьте другие блюда с аналогичной разметкой -->
         </div>
       </div>

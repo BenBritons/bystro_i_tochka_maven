@@ -36,7 +36,8 @@ public class FoodServlet extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {
-        ArrayList<Food> foods = new RestaurantsServiceImpl().findEntityById((int)request.getAttribute("rest_id")).getFoods();
+        ArrayList<Food> foods = new RestaurantsServiceImpl().findEntityById(Integer.parseInt(request.getParameter("rest_id"))).getFoods();
+        System.out.println("AAAAAAAAAAAAAAAAAAA");
         request.setAttribute("rest_food_list", foods);
         request.getRequestDispatcher("/order.jsp").forward(request, response);
     }

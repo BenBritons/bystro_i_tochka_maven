@@ -44,12 +44,14 @@
   <main>
     <section class="container mt-4">
       <h2 class="mb-4">Рестораны</h2>
+      <for class="row">
       <%
         ArrayList<Restaurants> restaurants = (ArrayList<Restaurants>) request.getAttribute("restaurants");
-        for(Restaurants t : restaurants){%>
-        <form action = "food" method="post" class="col-md-4 mb-4">
+        for(Restaurants t : restaurants){
+      %>
+        <form id="rest_form" class="col-md-4 mb-4"  action="food" method="post">
             <div class="card">
-              <form style = "display:none" name="rest_id"><%=t.getId()%></form>
+              <input type="hidden" name="rest_id" value="<%=t.getId()%>">
               <img src="images/restaurant<%=t.getId()%>.jpg" class="card-img-top" alt="Ресторан 1">
               <div class="card-body">
                 <h5 class="card-title"><%=t.getName()%></h5>
