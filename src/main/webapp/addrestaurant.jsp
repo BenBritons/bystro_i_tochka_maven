@@ -4,6 +4,7 @@
   <title>Добавить ресторан</title>
   <!-- Подключите необходимые стили и скрипты -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 </head>
 <body>
   <!-- Добавьте header и footer, если они используются в вашем проекте -->
