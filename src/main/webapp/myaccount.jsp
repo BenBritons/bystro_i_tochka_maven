@@ -59,6 +59,9 @@
         <div class="add-restaurant-button">
           <button id="add-restaurant-btn">Добавить ресторан</button>
         </div>
+        <div class="add-food-button">
+          <button id="add-food-btn">Добавить ресторан</button>
+        </div>
       </div>
 
       <%
@@ -72,11 +75,14 @@ String accountDetailsClass = isAdmin ? "account-details admin" : "account-detail
     var isAdmin = document.querySelector(".account-details").classList.contains("admin");
   
     var addRestaurantBtn = document.getElementById("add-restaurant-btn");
+    var addFoodBtn = document.getElementById("add-food-btn");
 
     if (isAdmin) {
       addRestaurantBtn.style.display = "block";
+      addFoodBtn.style.display = "block";
     } else {
       addRestaurantBtn.style.display = "none";
+      addFoodBtn.style.display = "none";
     }
   </script>
   </main>
