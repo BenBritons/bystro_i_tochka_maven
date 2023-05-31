@@ -81,6 +81,12 @@
         <section class="basket-order-section">
         <h3 style = "margin-bottom: 20px;">Общая стоимость заказа: 30$</h3>
         <button class="glow-button">Заказать</button>
+        <div class="promo-code-form">
+          <form action="/applyPromoCode" style="margin-top: 50px;" method="post">
+            <input type="text" name="promoCode" placeholder="Введите промокод" />
+            <button type="submit" class = "btn-secondary">Применить</button>
+          </form>
+        </div>
         </section>
     </div>
     
