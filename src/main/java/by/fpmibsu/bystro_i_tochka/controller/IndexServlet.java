@@ -33,6 +33,7 @@ public class IndexServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {
         ArrayList<Restaurants> restaurants = new RestaurantsServiceImpl().findAll();
+        request.setAttribute("logined", request.getSession().getAttribute("loggined"));
         request.setAttribute("restaurants", restaurants);
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }

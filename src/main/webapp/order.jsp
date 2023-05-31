@@ -15,8 +15,8 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="../bystro_i_tochka_maven/src/main/webapp/images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
+            <a class="navbar-brand" href="">
+                <img src="images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -59,7 +59,7 @@
             ArrayList<Food> restaurants = (ArrayList<Food>) request.getAttribute("rest_food_list");
             for(Food t : restaurants){%>
           <div class="menu-item">
-            <img src="../bystro_i_tochka_maven/src/main/webapp/images/pizza.jpg" alt="Пицца Маргарита" class="menu-item-image">
+            <img src="images/food<%=t.getId()%>.jpg" alt="Пицца Маргарита" class="menu-item-image">
             <div class="menu-item-details">
               <h3><%=t.getName()%></h3>
               <p>Состав: томатный соус, моцарелла, базилик</p>

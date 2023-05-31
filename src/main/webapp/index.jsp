@@ -34,9 +34,22 @@
             </li>
           </ul>
         </div>
+        <%
+          if(request.getAttribute("logined")!= null){
+          if((boolean)request.getAttribute("logined")){
+        %>
         <a class="nav-link ms-auto" href="account.jsp">
-            <i class="fas fa-user"></i> Мой аккаунт
+            <i class="fas fa-user"></i> Кабинет личный
         </a>
+        <%} else{%>{
+          <a class="nav-link ms-auto" href="account.jsp">
+            <i class="fas fa-user"></i> Мой аккаунт
+          </a>
+          }<%} }else{ %>
+        <a class="nav-link ms-auto" href="account.jsp">
+          <i class="fas fa-user"></i> Мой аккаунт
+        </a>
+        <%}%>
       </div>
     </nav>
   </header>
