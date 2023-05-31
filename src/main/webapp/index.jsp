@@ -3,6 +3,7 @@
 <html lang="ru">
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Быстро и Точка - Заказ еды онлайн</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
@@ -33,7 +34,7 @@
             </li>
           </ul>
         </div>
-        <a class="nav-link ms-auto" href="account.html">
+        <a class="nav-link ms-auto" href="account.jsp">
             <i class="fas fa-user"></i> Мой аккаунт
         </a>
       </div>
@@ -43,19 +44,19 @@
   <main>
     <section class="container mt-4">
       <h2 class="mb-4">Рестораны</h2>
-      <div class="row">
       <%
         ArrayList<Restaurants> restaurants = (ArrayList<Restaurants>) request.getAttribute("restaurants");
-        for(int i = 0; i < 3; ++i){ %>
-        <div class="col-md-4 mb-4">
-        <div class="card">
-        <img src="images/restaurant1.jpg" class="card-img-top" alt="Ресторан 1">
-        <div class="card-body">
-        <h5 class="card-title"><%=restaurants.get(i).getName()%></h5>
-        <a href="order.html" class="btn btn-primary">Заказать</a>
-        </div>
-        </div>
-        </div>
+        for(Restaurants t : restaurants){%>
+        <form action = "food" method="post" class="col-md-4 mb-4">
+            <div class="card">
+              <form style = "display:none" name="rest_id"><%=t.getId()%></form>
+              <img src="images/restaurant<%=t.getId()%>.jpg" class="card-img-top" alt="Ресторан 1">
+              <div class="card-body">
+                <h5 class="card-title"><%=t.getName()%></h5>
+                <button class="btn btn-primary">Заказать</button>
+              </div>
+            </div>
+        </form>
         <%}%>
       </div>
     </section>

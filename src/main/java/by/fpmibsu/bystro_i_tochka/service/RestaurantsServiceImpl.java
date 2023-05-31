@@ -3,6 +3,7 @@ package by.fpmibsu.bystro_i_tochka.service;
 import by.fpmibsu.bystro_i_tochka.DAO.AddressDAO;
 import by.fpmibsu.bystro_i_tochka.DAO.RestaurantsDAO;
 import by.fpmibsu.bystro_i_tochka.entity.Address;
+import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
@@ -47,7 +48,7 @@ public class RestaurantsServiceImpl implements BaseRestaurantsService{
     }
 
     @Override
-    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException {
-        dao.update(country, id, address, workTimeStart, workTimeEnd, weekends, name);
+    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name, ArrayList<Food> foods) throws DaoException {
+        dao.update(country, id, address, workTimeStart, workTimeEnd, weekends, name, foods);
     }
 }

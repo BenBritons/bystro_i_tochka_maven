@@ -9,10 +9,7 @@ import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 import java.sql.*;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RestaurantsDAO implements BaseRestaurantsDAO{
@@ -27,10 +24,10 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             "DELETE FROM restaurants WHERE ID=?";
 
     private static final String SQL_CREATE_FOOD =
-            "INSERT INTO restaurants(ADDRESS_ID,TIME_START,TIME_END,WEEKENDS,NAME) VALUES(?,?,?,?,?)";
+            "INSERT INTO restaurants(ADDRESS_ID,TIME_START,TIME_END,WEEKENDS,NAME,FOODS) VALUES(?,?,?,?,?,?)";
 
     private static final String SQL_UPDATE_FOOD =
-            "UPDATE restaurants SET ADDRESS_ID=?,TIME_START=?,TIME_END=?,WEEKENDS=?,NAME=? WHERE ID=?";
+            "UPDATE restaurants SET ADDRESS_ID=?,TIME_START=?,TIME_END=?,WEEKENDS=?,NAME=?,FOODS=? WHERE ID=?";
 
     private Connection connection = null;
     private Statement statement = null;
@@ -46,7 +43,6 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             abonents.addAll(loadFromResultSet(resultSet));
-            System.out.println("AAAAAAAAAAAAAAA");
         } catch (SQLException e) {
             throw new DaoException(e);
         } finally {
@@ -132,6 +128,13 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             }
             preparedStatement.setString(4, str.toString());
             preparedStatement.setString(5, t.getName());
+            StringBuilder nstr = new StringBuilder();
+            for (var tmp :
+                    t.getFoods()) {
+                nstr.append(String.valueOf(tmp.getId()));
+                nstr.append(" ");
+            }
+            preparedStatement.setString(6, nstr.toString());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -151,7 +154,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     }
 
     @Override
-    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name) throws DaoException {
+    public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name, ArrayList<Food> foods) throws DaoException {
         if (country == null) return;
         try{
             connection = ConnectionCreator.createConnection();
@@ -166,6 +169,13 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             }
             preparedStatement.setString(4,str.toString());
             preparedStatement.setString(5,name);
+            StringBuilder nstr = new StringBuilder();
+            for (var tmp :
+                    foods) {
+                nstr.append(String.valueOf((tmp)));
+                nstr.append(" ");
+            }
+            preparedStatement.setString(6, nstr.toString());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 country.setWeekends(weekends);
@@ -173,6 +183,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
                 country.setWorkTimeEnd(workTimeEnd);
                 country.setLocation(address);
                 country.setName(name);
+                country.setFoods(foods);
             }
         } catch (SQLException e){
             throw new DaoException(e);
@@ -196,6 +207,13 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             country.setWorkTimeEnd(resultSet.getTime(4).toLocalTime());
             country.setWeekends(parseString(resultSet.getString(5)));
             country.setName(resultSet.getString(6));
+            ArrayList<Food> tmp_food = new ArrayList<>();
+            for (var tmp :
+                    parseStringF(resultSet.getString(7))) {
+                FoodDAO dao = new FoodDAO();
+                tmp_food.add(dao.findEntityById(tmp));
+            }
+            country.setFoods(tmp_food);
             countries.add(country);
         }
         return countries;
@@ -209,5 +227,12 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
             days.add(tmp_day);
         }
         return days;
+    }
+    private ArrayList<Integer> parseStringF(String str){
+
+        return Arrays
+                .stream(str.split(" ")) // split
+                .map(Integer::parseInt) // convert to String to Integer
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

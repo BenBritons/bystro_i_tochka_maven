@@ -1,6 +1,7 @@
 package by.fpmibsu.bystro_i_tochka.controller;
 
-import by.fpmibsu.bystro_i_tochka.DAO.RestaurantsDAO;
+import by.fpmibsu.bystro_i_tochka.DAO.FoodDAO;
+import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 import by.fpmibsu.bystro_i_tochka.service.RestaurantsServiceImpl;
@@ -13,9 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("")
-public class IndexServlet extends HttpServlet {
-
+@WebServlet("/food")
+public class FoodServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -27,13 +27,17 @@ public class IndexServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        request.getRequestDispatcher("/food").forward(request, response);
+        try {
+            request.setCharacterEncoding("UTF-8");
+            processRequest(request, response);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {
-        ArrayList<Restaurants> restaurants = new RestaurantsServiceImpl().findAll();
-        request.setAttribute("restaurants", restaurants);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        ArrayList<Food> foods = new RestaurantsServiceImpl().findEntityById((int)request.getAttribute("rest_id")).getFoods();
+        request.setAttribute("rest_food_list", foods);
+        request.getRequestDispatcher("/order.jsp").forward(request, response);
     }
 }
