@@ -65,6 +65,7 @@
               <p>Состав: томатный соус, моцарелла, базилик</p>
               <p>Цена: $<%=t.getPrice()%></p>
               <button class="btn btn-primary add-to-cart">Добавить в корзину</button>
+              <div class="container"></div>
             </div>
           </div>
           <%}%>
