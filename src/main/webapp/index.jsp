@@ -35,11 +35,11 @@
           </ul>
         </div>
         <%
-          if(request.getAttribute("logined")!= null){
-          if((boolean)request.getAttribute("logined")){
+          if(request.getSession().getAttribute("logined")!= null){
+          if((boolean)request.getSession().getAttribute("logined")){
         %>
-        <a class="nav-link ms-auto" href="account.jsp">
-            <i class="fas fa-user"></i> Кабинет личный
+        <a class="nav-link ms-auto" href="myaccount">
+            <i class="fas fa-user"></i><%=request.getSession().getAttribute("username")%>
         </a>
         <%} else{%>{
           <a class="nav-link ms-auto" href="account.jsp">

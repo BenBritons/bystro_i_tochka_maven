@@ -26,10 +26,9 @@ public class AccountServlet extends HttpServlet {
         try {
             if(new UserServiceImpl().login(login,password)){
                 PrintWriter out= response.getWriter();
-                request.setAttribute("logined", true);
-                out.println("<h1>");
-                out.println("ты вошел крутыш!!!!!!!!!!!");
-                out.println("</h1>");
+                request.getSession().setAttribute("logined", true);
+                request.getSession().setAttribute("username", login);
+                request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
             }else {
                 request.setAttribute("logined", false);
                 PrintWriter out= response.getWriter();

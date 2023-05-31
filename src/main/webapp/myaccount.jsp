@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -13,7 +13,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="/bystro_i_tochka_maven_war">
                 <img src="images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,9 +36,22 @@
                 <i class="bi bi-cart"></i>
                 <span id="cart-counter">0</span>
               </a>
-            <a class="nav-link ms-auto" href="account.html">
-                <i class="fas fa-user"></i> Мой аккаунт
-            </a>
+              <%
+                  if(request.getSession().getAttribute("logined")!= null){
+                      if((boolean)request.getSession().getAttribute("logined")){
+              %>
+              <a class="nav-link ms-auto" href="account.jsp">
+                  <i class="fas fa-user"></i><%=request.getSession().getAttribute("username")%>
+              </a>
+              <%} else{%>{
+              <a class="nav-link ms-auto" href="account.jsp">
+                  <i class="fas fa-user"></i> Мой аккаунт
+              </a>
+              }<%} }else{ %>
+              <a class="nav-link ms-auto" href="account.jsp">
+                  <i class="fas fa-user"></i> Мой аккаунт
+              </a>
+              <%}%>
           </div>
         </nav>
       </header>
@@ -48,9 +61,9 @@
         <h1 class="account-h1" >Мой аккаунт</h1>
         <div id="userInfo">
             <h2>Информация о пользователе</h2>
-            <p id="userName"></p>
-            <p id="userLogin"></p>
-            <p id="password"></p>
+            <p id="userName"><%=request.getAttribute("name")%></p>
+            <p id="userLogin"><%=request.getAttribute("login")%></p>
+            <p id="password"><%=request.getAttribute("password")%></p>
           </div>
     </div>
 
@@ -63,7 +76,7 @@
 
       <%
 
-boolean isAdmin = ...; 
+boolean isAdmin = false;
 
 String accountDetailsClass = isAdmin ? "account-details admin" : "account-details";
 %>

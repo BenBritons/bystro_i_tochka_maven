@@ -38,9 +38,22 @@
                 <i class="bi bi-cart"></i>
                 <span id="cart-counter">0</span>
               </a>
+            <%
+              if(request.getSession().getAttribute("logined")!= null){
+                if((boolean)request.getSession().getAttribute("logined")){
+            %>
             <a class="nav-link ms-auto" href="account.jsp">
-                <i class="fas fa-user"></i> Мой аккаунт
+              <i class="fas fa-user"></i><%=request.getSession().getAttribute("username")%>
             </a>
+            <%} else{%>{
+            <a class="nav-link ms-auto" href="account.jsp">
+              <i class="fas fa-user"></i> Мой аккаунт
+            </a>
+            }<%} }else{ %>
+            <a class="nav-link ms-auto" href="account.jsp">
+              <i class="fas fa-user"></i> Мой аккаунт
+            </a>
+            <%}%>
           </div>
         </nav>
       </header>

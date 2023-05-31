@@ -1,9 +1,10 @@
 package by.fpmibsu.bystro_i_tochka.controller;
 
-import by.fpmibsu.bystro_i_tochka.DAO.RestaurantsDAO;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
+import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 import by.fpmibsu.bystro_i_tochka.service.RestaurantsServiceImpl;
+import by.fpmibsu.bystro_i_tochka.service.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet("")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/myaccount")
+public class MyaccountServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,12 +29,18 @@ public class IndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        request.getRequestDispatcher("/food").forward(request, response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {
-        ArrayList<Restaurants> restaurants = new RestaurantsServiceImpl().findAll();
-        request.setAttribute("restaurants", restaurants);
-        request.getRequestDispatcher("/index.jsp").forward(request, response);
+        UserServiceImpl user = new UserServiceImpl();
+        ArrayList<User> users = user.findAll();
+        for(var tmp : users){
+            if(tmp.getLogin().equals(request.getSession().getAttribute("username"))){
+                request.setAttribute("name", tmp.getName());
+                request.setAttribute("login", tmp.getLogin());
+                request.setAttribute("password", tmp.getPassword());
+            }
+        }
+        request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
     }
 }

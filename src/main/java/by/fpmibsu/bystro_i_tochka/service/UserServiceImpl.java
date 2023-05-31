@@ -7,6 +7,7 @@ import by.fpmibsu.bystro_i_tochka.DAO.UserDAO;
 import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -44,6 +45,11 @@ public class UserServiceImpl implements BaseUserService{
     public void deleteUser(User user) throws DaoException {
         logger.log(Level.INFO, "user deletes " + user.toString());
         deleteUser(user.getId());
+    }
+
+    @Override
+    public ArrayList<User> findAll() throws DaoException {
+        return (ArrayList<User>) new UserDAO().findAll();
     }
 
     @Override

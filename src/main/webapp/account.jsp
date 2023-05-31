@@ -13,8 +13,9 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container">
-            <a class="navbar-brand" href="index.jsp">
-                <img src="images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
+              <a type="submit" class="navbar-brand" href="/bystro_i_tochka_maven_war">
+                <img src="images/logo.png" alt="Логотип" class="logo-image"> Быстро и Точка
+              </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -22,13 +23,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Главная</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war">Главная</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html#contacts">О нас</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war#contacts">О нас</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html#about">Контакты</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war#about">Контакты</a>
                 </li>
               </ul>
             </div>
@@ -36,9 +37,22 @@
                 <i class="bi bi-cart"></i>
                 <span id="cart-counter">0</span>
               </a>
+            <%
+              if(request.getSession().getAttribute("logined")!= null){
+                if((boolean)request.getSession().getAttribute("logined")){
+            %>
             <a class="nav-link ms-auto" href="account.jsp">
-                <i class="fas fa-user"></i> Мой аккаунт
+              <i class="fas fa-user"></i><%=request.getSession().getAttribute("username")%>
             </a>
+            <%} else{%>{
+            <a class="nav-link ms-auto" href="account.jsp">
+              <i class="fas fa-user"></i> Мой аккаунт
+            </a>
+            }<%} }else{ %>
+            <a class="nav-link ms-auto" href="account.jsp">
+              <i class="fas fa-user"></i> Мой аккаунт
+            </a>
+            <%}%>
           </div>
         </nav>
       </header>
