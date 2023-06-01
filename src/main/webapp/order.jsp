@@ -71,16 +71,16 @@
           <%
             ArrayList<Food> restaurants = (ArrayList<Food>) request.getAttribute("rest_food_list");
             for(Food t : restaurants){%>
-          <div class="menu-item">
+          <form class="menu-item" action="food" method="post">
             <img src="images/food<%=t.getId()%>.jpg" alt="Пицца Маргарита" class="menu-item-image">
             <div class="menu-item-details">
               <h3><%=t.getName()%></h3>
               <p>Состав: томатный соус, моцарелла, базилик</p>
               <p>Цена: $<%=t.getPrice()%></p>
-              <button class="btn btn-primary add-to-cart">Добавить в корзину</button>
+              <button class="btn btn-primary add-to-cart" name="food_id" value="<%=t.getId()%>">Добавить в корзину</button>
               <div class="container"></div>
             </div>
-          </div>
+          </form>
           <%}%>
           <!-- Добавьте другие блюда с аналогичной разметкой -->
         </div>
