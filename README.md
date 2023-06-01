@@ -38,16 +38,20 @@
 
 ## 5. Диаграммы классов
 Entity
+<br>
 ![Entity](docs/entity.jpg)
 Dao
+<br>
 ![Dao](docs/dao.jpg)
 Service
+<br>
 ![Service](docs/service.jpg)
 Servlet
+<br>
 ![Servlet](docs/servlet.jpg)
 
 ## 6. Диаграмма компонентов
-![Diagram]docs/component_diagram.jpg)
+![Diagram](docs/component_diagram.jpg)
 
 ## 7. Диаграмма развёртывания
-![Diagram]docs/razvert_diagram.jpg)
+![Diagram](docs/razvert_diagram.jpg)
