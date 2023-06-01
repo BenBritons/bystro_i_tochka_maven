@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +57,10 @@
       </header>
 
   <main>
-    <div class="container">
+    <div class="container" style="display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;">
         <h1 class="account-h1" >Мой аккаунт</h1>
         <div id="userInfo">
             <h2>Информация о пользователе</h2>
@@ -65,6 +68,7 @@
             <p id="userLogin"><%=request.getAttribute("login")%></p>
             <p id="password"><%=request.getAttribute("password")%></p>
           </div>
+        <button style="margin-top: 250px" class="btn btn-danger">Выйти из аккаунта</button>
     </div>
 
     <div class="account-details">

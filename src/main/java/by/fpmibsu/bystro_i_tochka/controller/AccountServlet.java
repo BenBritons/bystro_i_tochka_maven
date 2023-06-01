@@ -16,7 +16,6 @@ public class AccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        request.getRequestDispatcher("local").forward(request, response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -28,7 +27,7 @@ public class AccountServlet extends HttpServlet {
                 PrintWriter out= response.getWriter();
                 request.getSession().setAttribute("logined", true);
                 request.getSession().setAttribute("username", login);
-                request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
+                request.getRequestDispatcher("myaccount").forward(request, response);
             }else {
                 request.setAttribute("logined", false);
                 PrintWriter out= response.getWriter();

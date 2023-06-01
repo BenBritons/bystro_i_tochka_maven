@@ -28,7 +28,11 @@ public class MyaccountServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        try {
+            processRequest(request, response);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {

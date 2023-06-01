@@ -61,21 +61,15 @@
       <main>
         <div class="container">
             <h1 class="account-h1" >Мой аккаунт</h1>
-        
+          <%
+            if(request.getSession().getAttribute("logined")!= null){
+              if((boolean)request.getSession().getAttribute("logined")){
+          %>
             <!-- Форма входа -->
             <form id="loginForm" class="registration-form" action="account" method="post">
-              <h2>Вход</h2>
-              <label for="loginUsername">Логин:</label>
-              <input type="text" id="loginUsername" name="username" placeholder="Логин" required>
-              <br>
-              <label for="loginPassword">Пароль:</label>
-              <input type="password" id="loginPassword" name="password" placeholder="Пароль" required>
-              <br>
-              <button type="submit" class="btn btn-primary" style = "margin-top: 10px;">Войти</button>
-            <br>
-              <button type="button" id="toggleRegisterBtn" class="change-button">У меня нету аккаунта. Зарегистрироваться</button>
+              <h2>Вы уже авторизированы)</h2>
             </form>
-        
+          <%}else{%>
             <!-- Форма регистрации (изначально скрыта) -->
             <div id="registrationFormContainer" class = "registration-form" style="display: none;">
               <h2>Регистрация</h2>
@@ -94,6 +88,20 @@
                 <button type="button" class="change-button" id="toggleLoginBtn">У меня уже есть аккаунт. Войти</button>
               </form>
             </div>
+          <%}}else{%>
+          <form id="loginForm" class="registration-form" action="account" method="post">
+            <h2>Вход</h2>
+            <label for="loginUsername">Логин:</label>
+            <input type="text" id="loginUsername" name="username" placeholder="Логин" required>
+            <br>
+            <label for="loginPassword">Пароль:</label>
+            <input type="password" id="loginPassword" name="password" placeholder="Пароль" required>
+            <br>
+            <button type="submit" class="btn btn-primary" style = "margin-top: 10px;">Войти</button>
+            <br>
+            <button type="button" id="toggleRegisterBtn" class="change-button">У меня нету аккаунта. Зарегистрироваться</button>
+          </form>
+          <%}%>
         
             <!-- Блок с информацией о пользователе (изначально скрыт) -->
             <div id="userInfo" style="display: none;">
