@@ -46,6 +46,7 @@ Dao
 Service
 <br>
 ![Service](docs/service.jpg)
+<br>
 Servlet
 <br>
 ![Servlet](docs/servlet.jpg)
@@ -54,4 +55,4 @@ Servlet
 ![Diagram](docs/component_diagram.jpg)
 
 ## 7. Диаграмма развёртывания
-![Diagram](docs/razvert_diagram.jpg)
+![Diagram](docs/razvert-diagram.jpg)
