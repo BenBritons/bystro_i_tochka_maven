@@ -20,7 +20,6 @@ public class MyaccountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8");
             processRequest(request, response);
         } catch (DaoException e) {
             throw new RuntimeException(e);

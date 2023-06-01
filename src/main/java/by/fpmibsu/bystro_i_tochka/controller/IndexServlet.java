@@ -19,7 +19,6 @@ public class IndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            request.setCharacterEncoding("UTF-8");
             processRequest(request, response);
         } catch (DaoException e) {
             throw new RuntimeException(e);
@@ -27,7 +26,6 @@ public class IndexServlet extends HttpServlet {
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
         request.getRequestDispatcher("/food").forward(request, response);
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

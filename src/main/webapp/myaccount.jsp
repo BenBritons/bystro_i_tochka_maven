@@ -22,13 +22,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Главная</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war">Главная</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html#contacts">О нас</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war#contacts">О нас</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html#about">Контакты</a>
+                  <a class="nav-link" href="/bystro_i_tochka_maven_war#about">Контакты</a>
                 </li>
               </ul>
             </div>
