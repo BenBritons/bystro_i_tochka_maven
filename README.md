@@ -1,12 +1,6 @@
 # Быстро и точка
 
-## Оглавление
-1. [Описание](#1.-описание)
-2. [Использованные технологии](#2.-используемые-технологии)
-3. [Use case diagram](#3.-Use-case-diagram)
-4. [ER-модель базы данных](#4.-ER-модель-базы-данных)
-5. [Диаграммы классов](#5.-Диаграммы-классов)
-6. [Диаграмма компонентов и диаграмма развертывания](#6.-Диаграмма-компонентов-и-диаграмма-развертывания)
+[[_TOC_]]
 
 ## 1. Описание
 Сайт доставки еды. С несколькими типами еды, корзиной, возможностью выкладывания объявлений с помощью сайта, возможностью заказа доставки, учетные записи клиента, доставщика, продавца еды, админ-редактор. Пользователи могут рассматривать объявления о продаже еды, заказывать блюдо на конкретный адрес, регистрироваться, оставлять отзывы о еде и продавце. Клиент заказывает еду, оставляет отзывы. Доставщик может брать заказ, просматривать информацию о заказе. Продавец еды может размещать заказы. Администратор-редактор может банить пользователей, продавцов, заказчиков, удалять\размещать объявления, комментарии.
@@ -30,20 +24,23 @@
 -  JavaScript
 
 ## 3. Use case diagram
-![Use case diagram](src/main/webapp/images/usecasediagram.jpg)
+![Use case diagram](docs/usecasediagram.jpg)
 
 ## 4. ER-модель базы данных
-![ER Model](src/main/webapp/images/ermodel.jpg)
+![ER Model](docs/ermodel.jpg)
 
 ## 5. Диаграммы классов
 Entity
-![Entity](src/main/webapp/images/entity.jpg)
+![Entity](docs/entity.jpg)
 Dao
-![Dao](src/main/webapp/images/dao.jpg)
+![Dao](docs/dao.jpg)
 Service
-![Service](src/main/webapp/images/service.jpg)
+![Service](docs/service.jpg)
 Servlet
-![Servlet](src/main/webapp/images/servlet.jpg)
+![Servlet](docs/servlet.jpg)
 
-## 6. Диаграмма компонентов и диаграмма развертывания
-![Diagram](src/main/webapp/images/diagram.jpg)
+## 6. Диаграмма компонентов
+![Diagram]docs/component_diagram.jpg)
+
+## 7. Диаграмма развёртывания
+![Diagram]docs/razvert_diagram.jpg)
