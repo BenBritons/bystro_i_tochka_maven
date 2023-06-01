@@ -34,7 +34,7 @@ public class PromosDAO implements BasePromosDAO{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             while(resultSet.next()){
@@ -58,7 +58,7 @@ public class PromosDAO implements BasePromosDAO{
     public Promos findEntityById(int id) throws DaoException {
         Promos country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_FOOD_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -78,7 +78,7 @@ public class PromosDAO implements BasePromosDAO{
     public boolean delete(Promos t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,t.getId());
             int rows = preparedStatement.executeUpdate();
@@ -103,7 +103,7 @@ public class PromosDAO implements BasePromosDAO{
     public boolean create(Promos t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_FOOD,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,t.getFood().getId());
             preparedStatement.setInt(2,t.getDiscount());
@@ -129,7 +129,7 @@ public class PromosDAO implements BasePromosDAO{
     public void update(Promos country, int id, Food food, int discount) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FOOD);
             preparedStatement.setInt(1,food.getId());
             preparedStatement.setInt(2,discount);

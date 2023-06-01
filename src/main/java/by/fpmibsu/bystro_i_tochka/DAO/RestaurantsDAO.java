@@ -2,7 +2,6 @@ package by.fpmibsu.bystro_i_tochka.DAO;
 
 import by.fpmibsu.bystro_i_tochka.entity.Address;
 import by.fpmibsu.bystro_i_tochka.entity.Food;
-import by.fpmibsu.bystro_i_tochka.entity.Promos;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
@@ -39,7 +38,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             abonents.addAll(loadFromResultSet(resultSet));
@@ -57,7 +56,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     public Restaurants findEntityById(int id) throws DaoException {
         Restaurants country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_FOOD_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -77,7 +76,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     public boolean delete(Restaurants t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,t.getId());
             int rows = preparedStatement.executeUpdate();
@@ -96,7 +95,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     @Override
     public boolean delete(int id) throws DaoException {
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,id);
             int rows = preparedStatement.executeUpdate();
@@ -116,7 +115,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     public boolean create(Restaurants t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_FOOD,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,t.getLocation().getId());
             preparedStatement.setTime(2, Time.valueOf(t.getWorkTimeStart()));
@@ -157,7 +156,7 @@ public class RestaurantsDAO implements BaseRestaurantsDAO{
     public void update(Restaurants country, int id, Address address, LocalTime workTimeStart, LocalTime workTimeEnd, HashSet<DayOfWeek> weekends, String name, ArrayList<Food> foods) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FOOD);
             preparedStatement.setInt(1,address.getId());
             preparedStatement.setTime(2, Time.valueOf(workTimeStart));

@@ -4,7 +4,6 @@ import by.fpmibsu.bystro_i_tochka.entity.*;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
 import java.sql.*;
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ReviewsDAO implements BaseReviewsDAO{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             while(resultSet.next()){
@@ -62,7 +61,7 @@ public class ReviewsDAO implements BaseReviewsDAO{
     public Reviews findEntityById(int id) throws DaoException {
         Reviews country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_FOOD_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -86,7 +85,7 @@ public class ReviewsDAO implements BaseReviewsDAO{
     @Override
     public boolean delete(int id) throws DaoException {
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,id);
             int rows = preparedStatement.executeUpdate();
@@ -106,7 +105,7 @@ public class ReviewsDAO implements BaseReviewsDAO{
     public boolean create(Reviews t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_FOOD,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,t.getFood().getId());
             preparedStatement.setInt(2,t.getUser().getId());
@@ -134,7 +133,7 @@ public class ReviewsDAO implements BaseReviewsDAO{
     public void update(Reviews country, int id, Food food, User user, int mark, String comment) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FOOD);
             preparedStatement.setInt(1,food.getId());
             preparedStatement.setInt(2,user.getId());

@@ -1,7 +1,5 @@
 package by.fpmibsu.bystro_i_tochka.DAO;
 
-import by.fpmibsu.bystro_i_tochka.entity.Address;
-import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
@@ -35,7 +33,7 @@ public class UserDAO implements BaseUserDAO{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_USER);
             while(resultSet.next()){
@@ -60,7 +58,7 @@ public class UserDAO implements BaseUserDAO{
     public User findEntityById(int id) throws DaoException {
         User country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_ADDRESS_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -80,7 +78,7 @@ public class UserDAO implements BaseUserDAO{
     public boolean delete(User t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_ADDRESS);
             preparedStatement.setLong(1,t.getId());
             int rows = preparedStatement.executeUpdate();
@@ -99,7 +97,7 @@ public class UserDAO implements BaseUserDAO{
     @Override
     public boolean delete(int id) throws DaoException {
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_ADDRESS);
             preparedStatement.setLong(1,id);
             int rows = preparedStatement.executeUpdate();
@@ -119,7 +117,7 @@ public class UserDAO implements BaseUserDAO{
     public boolean create(User t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_ADDRESS,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,t.getName());
             preparedStatement.setString(2,t.getLogin());
@@ -147,7 +145,7 @@ public class UserDAO implements BaseUserDAO{
     public void update(User country, int id, String name, String login, String password, boolean admin) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_ADDRESS);
             preparedStatement.setString(1,name);
             preparedStatement.setString(2,login);

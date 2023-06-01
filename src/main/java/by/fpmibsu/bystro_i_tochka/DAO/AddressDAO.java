@@ -35,7 +35,7 @@ public class AddressDAO implements BaseAddressDAO {
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_ADDRESS);
             while(resultSet.next()){
@@ -59,7 +59,7 @@ public class AddressDAO implements BaseAddressDAO {
     public Address findEntityById(int id) throws DaoException {
         Address country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_ADDRESS_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -79,7 +79,7 @@ public class AddressDAO implements BaseAddressDAO {
     public boolean delete(Address address) throws DaoException {
         if (address == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_ADDRESS);
             preparedStatement.setLong(1,address.getId());
             int rows = preparedStatement.executeUpdate();
@@ -104,7 +104,7 @@ public class AddressDAO implements BaseAddressDAO {
     public boolean create(Address address) throws DaoException {
         if (address == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_ADDRESS,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,address.getStreet());
             preparedStatement.setInt(2,address.getHouse());
@@ -131,7 +131,7 @@ public class AddressDAO implements BaseAddressDAO {
     public void update(Address country, int id, String street, int house, int flatnumber) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_ADDRESS);
             preparedStatement.setString(1,street);
             preparedStatement.setInt(2,house);

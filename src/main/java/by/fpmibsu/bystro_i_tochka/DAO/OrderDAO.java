@@ -4,7 +4,6 @@ import by.fpmibsu.bystro_i_tochka.entity.*;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
 import java.sql.*;
-import java.time.DayOfWeek;
 import java.util.*;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -36,7 +35,7 @@ public class OrderDAO implements BaseOrderDAO{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             while(resultSet.next()){
@@ -69,7 +68,7 @@ public class OrderDAO implements BaseOrderDAO{
     public Order findEntityById(int id) throws DaoException {
         Order country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_FOOD_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -93,7 +92,7 @@ public class OrderDAO implements BaseOrderDAO{
     @Override
     public boolean delete(int id) throws DaoException {
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,id);
             int rows = preparedStatement.executeUpdate();
@@ -113,7 +112,7 @@ public class OrderDAO implements BaseOrderDAO{
     public boolean create(Order t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_FOOD,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setInt(1,t.getUser().getId());
             preparedStatement.setInt(2,t.getAddress().getId());
@@ -147,7 +146,7 @@ public class OrderDAO implements BaseOrderDAO{
     public void update(Order country, User user, Address address, Date date, ArrayList<Food> order) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FOOD);
             preparedStatement.setInt(1,user.getId());
             preparedStatement.setInt(2,address.getId());

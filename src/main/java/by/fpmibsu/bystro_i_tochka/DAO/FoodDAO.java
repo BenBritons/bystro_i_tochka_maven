@@ -2,7 +2,6 @@ package by.fpmibsu.bystro_i_tochka.DAO;
 
 import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
-import by.fpmibsu.bystro_i_tochka.service.UserServiceImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 
@@ -37,7 +36,7 @@ public class FoodDAO implements BaseFoodDAO {
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_FOOD);
             while(resultSet.next()){
@@ -60,7 +59,7 @@ public class FoodDAO implements BaseFoodDAO {
     public Food findEntityById(int id) throws DaoException {
         Food country = null;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_FOOD_BY_ID);
             preparedStatement.setLong(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -80,7 +79,7 @@ public class FoodDAO implements BaseFoodDAO {
     public boolean delete(Food t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_DELETE_FOOD);
             preparedStatement.setInt(1,t.getId());
             int rows = preparedStatement.executeUpdate();
@@ -105,7 +104,7 @@ public class FoodDAO implements BaseFoodDAO {
     public boolean create(Food t) throws DaoException {
         if (t == null) return false;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_CREATE_FOOD,Statement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1,t.getName());
             preparedStatement.setDouble(2,t.getPrice());
@@ -131,7 +130,7 @@ public class FoodDAO implements BaseFoodDAO {
     public void update(Food country, int id, String name, double price) throws DaoException {
         if (country == null) return;
         try{
-            connection = ConnectionCreator.createConnection();
+            connection = ConnectionPool.getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_FOOD);
             preparedStatement.setString(1,name);
             preparedStatement.setDouble(2,price);
