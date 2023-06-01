@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,10 +35,11 @@ public class AccountServlet extends HttpServlet {
                 request.getSession().setAttribute("logined", true);
                 ArrayList<User> users = new UserServiceImpl().findAll();
                 for (var tmp :
-                        users) {
+                users) {
                     if (tmp.getLogin().equals(login) && tmp.getPassword().equals(password)) {
                         id = tmp.getId();
                         request.getSession().setAttribute("user", tmp);
+                        request.getSession().setAttribute("order", new Order(tmp, 0, tmp.getAddress(), new ArrayList<Food>(), new Date(2023,6,1)));
                         break;
                     }
                 }

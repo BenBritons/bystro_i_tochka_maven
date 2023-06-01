@@ -15,8 +15,8 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
           <div class="container">
-            <a class="navbar-brand" href="">
-                <img src="images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
+            <a class="navbar-brand" href="/bystro_i_tochka_maven_war">
+              <img src="images/logo.png" alt="Логотип" class="logo-image">Быстро и Точка</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>

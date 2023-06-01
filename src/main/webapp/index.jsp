@@ -1,5 +1,7 @@
 ﻿<%@ page import="by.fpmibsu.bystro_i_tochka.entity.Restaurants" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="by.fpmibsu.bystro_i_tochka.entity.User" %>
+<%@ page import="by.fpmibsu.bystro_i_tochka.entity.Order" %>
 <html lang="ru">
 
 <head>
@@ -36,10 +38,25 @@
         </div>
         <%
           if(request.getSession().getAttribute("logined")!= null){
+            Order order = (Order) request.getSession().getAttribute("order");
+        %>
+        <a href="basket.jsp" class="cart-icon ms-auto" style="text-decoration: none; margin-right: 10px;">
+          <i class="bi bi-cart"></i>
+          <span id="cart-counter"><%=order.getOrder().size()%></span>
+        </a>
+        <%}else{%>
+        <a href="basket.jsp" class="cart-icon ms-auto" style="text-decoration: none; margin-right: 10px;">
+          <i class="bi bi-cart"></i>
+          <span id="cart-counter_default">0</span>
+        </a>
+        <%}%>
+        <%
+          if(request.getSession().getAttribute("logined")!= null){
           if((boolean)request.getSession().getAttribute("logined")){
         %>
         <a class="nav-link ms-auto" href="myaccount">
-            <i class="fas fa-user"></i><%=request.getSession().getAttribute("username")%>
+          <i class="fas fa-user"></i><%User us =(User) request.getSession().getAttribute("user");%>
+          <%=us.getName()%>
         </a>
         <%} else{%>{
           <a class="nav-link ms-auto" href="account.jsp">
