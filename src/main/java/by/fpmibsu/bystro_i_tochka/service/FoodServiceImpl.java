@@ -14,7 +14,7 @@ public class FoodServiceImpl implements BaseFoodService{
     Logger logger = Logger.getLogger(FoodServiceImpl.class.getName());
     @Override
     public ArrayList<Food> findAll() throws DaoException {
-        logger.log(Level.INFO, "AAAAAAAAA VSIA EDA BYLA NAIDENA");
+        logger.log(Level.INFO, "all finded");
         return (ArrayList<Food>) dao.findAll();
     }
 

@@ -42,7 +42,7 @@ public class FoodServlet extends HttpServlet {
             int food_id = Integer.parseInt(request.getParameter("food_id"));
             request.getSession().setAttribute("num_in_cart", (int)request.getSession().getAttribute("num_in_cart") + 1);
             OrderServiceImpl orderService = new OrderServiceImpl();
-            orderService.addFoodToOrder(new FoodServiceImpl().findEntityById(food_id), );
+           // orderService.addFoodToOrder(new FoodServiceImpl().findEntityById(food_id), );
         }
 
         request.setAttribute("rest_food_list", foods);

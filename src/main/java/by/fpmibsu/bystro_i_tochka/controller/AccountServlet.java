@@ -44,7 +44,7 @@ public class AccountServlet extends HttpServlet {
                 Order order = new Order(new UserDAO().findEntityById(id), 0,new Address(), new ArrayList<Food>(), new Date());
                 OrderServiceImpl orderService = new OrderServiceImpl();
                 orderService.createOrder(order);
-                request.getSession().setAttribute("order", new Order(new UserDAO().findEntityById(id), new Address(), new ArrayList<Food>(), new Date()));
+                //request.getSession().setAttribute("order", new Order(new UserDAO().findEntityById(id), new Address(), new ArrayList<Food>(), new Date()));
                 request.getRequestDispatcher("/myaccount").forward(request, response);
             }else {
                 request.setAttribute("logined", false);

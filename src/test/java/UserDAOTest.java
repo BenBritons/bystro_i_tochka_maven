@@ -12,7 +12,7 @@ public class UserDAOTest {
         UserDAO userDAO = new UserDAO();
 
         // Устанавливаем ожидаемый ID пользователя
-        int expectedUserId = 20006;
+        int expectedUserId = 2004;
 
         // Вызываем метод findEntityById() для получения пользователя по ID
         User user = userDAO.findEntityById(expectedUserId);
