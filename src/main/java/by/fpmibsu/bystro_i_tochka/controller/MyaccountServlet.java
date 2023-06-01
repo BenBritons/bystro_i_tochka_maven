@@ -1,5 +1,6 @@
 package by.fpmibsu.bystro_i_tochka.controller;
 
+import by.fpmibsu.bystro_i_tochka.DAO.UserDAO;
 import by.fpmibsu.bystro_i_tochka.entity.Restaurants;
 import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
@@ -35,15 +36,11 @@ public class MyaccountServlet extends HttpServlet {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, DaoException {
-        UserServiceImpl user = new UserServiceImpl();
-        ArrayList<User> users = user.findAll();
-        for(var tmp : users){
-            if(tmp.getLogin().equals(request.getSession().getAttribute("username"))){
-                request.setAttribute("name", tmp.getName());
-                request.setAttribute("login", tmp.getLogin());
-                request.setAttribute("password", tmp.getPassword());
-            }
-        }
-        request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
+            User user = (User) request.getSession().getAttribute("user");
+                request.setAttribute("name", user.getName());
+                request.setAttribute("login", user.getLogin());
+                request.setAttribute("password", user.getPassword());
+                request.setAttribute("address", user.getAddress().toString());
+                request.getRequestDispatcher("/myaccount.jsp").forward(request, response);
     }
 }

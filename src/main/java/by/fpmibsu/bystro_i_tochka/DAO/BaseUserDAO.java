@@ -1,5 +1,6 @@
 package by.fpmibsu.bystro_i_tochka.DAO;
 
+import by.fpmibsu.bystro_i_tochka.entity.Address;
 import by.fpmibsu.bystro_i_tochka.entity.Food;
 import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
@@ -15,7 +16,7 @@ public interface BaseUserDAO {
     boolean delete(User t) throws DaoException;
     boolean delete(int id) throws DaoException;
     boolean create(User t) throws DaoException;
-    void update(User country,int id,String name, String login, String password, boolean admin) throws DaoException;
+    void update(User country, int id, String name, String login, String password, boolean admin, Address address) throws DaoException;
     default void close(Statement statement) {
         try {
             if (statement != null) {

@@ -1,4 +1,4 @@
-package by.fpmibsu.bystro_i_tochka.DAO;
+package by.fpmibsu.bystro_i_tochka.controller;
 
 import java.io.FileReader;
 import java.io.IOException;

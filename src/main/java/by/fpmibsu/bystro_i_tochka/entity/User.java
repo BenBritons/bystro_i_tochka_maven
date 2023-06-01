@@ -13,12 +13,21 @@ public class User {
     }
     private boolean admin;
 
-    public User(boolean admin, String name, String login, String password, int id) {
+    public User(boolean admin, String name, String login, String password, int id, Address address) {
         this.admin = admin;
         this.name = name;
         this.login = login;
         this.password = password;
         this.id = id;
+        this.address = address;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public User() {
@@ -72,7 +81,7 @@ public class User {
     private String password;
 
     private int id;
-
+    private Address address;
     public boolean isAdmin() {
         return admin;
     }

@@ -8,6 +8,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class Address {
+    @Override
+    public String toString() {
+        return "Улица " + street + '\'' +
+                ", дом " + house +
+                " квартира= " + flatNumber;
+    }
 
     private int id;
     private String street;

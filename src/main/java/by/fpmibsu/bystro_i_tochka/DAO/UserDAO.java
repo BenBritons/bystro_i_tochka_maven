@@ -1,5 +1,7 @@
 package by.fpmibsu.bystro_i_tochka.DAO;
 
+import by.fpmibsu.bystro_i_tochka.controller.ConnectionPool;
+import by.fpmibsu.bystro_i_tochka.entity.Address;
 import by.fpmibsu.bystro_i_tochka.entity.User;
 import by.fpmibsu.bystro_i_tochka.exeption.DaoException;
 
@@ -18,10 +20,10 @@ public class UserDAO implements BaseUserDAO{
             "DELETE FROM users WHERE ID=?";
 
     private static final String SQL_CREATE_ADDRESS =
-            "INSERT INTO users(NAME,LOGIN,PASS,IS_ADMIN) VALUES(?,?,?,?)";
+            "INSERT INTO users(NAME,LOGIN,PASS,IS_ADMIN,ADDRESS_ID) VALUES(?,?,?,?,?)";
 
     private static final String SQL_UPDATE_ADDRESS =
-            "UPDATE users SET NAME=?,LOGIN=?,PASS=?,IS_ADMIN=? WHERE ID=?";
+            "UPDATE users SET NAME=?,LOGIN=?,PASS=?,IS_ADMIN=?,ADDRESS_ID=? WHERE ID=?";
 
     private Connection connection = null;
     private Statement statement = null;
@@ -43,6 +45,7 @@ public class UserDAO implements BaseUserDAO{
                 abonent.setLogin(resultSet.getString("LOGIN"));
                 abonent.setPassword(resultSet.getString("PASS"));
                 abonent.setAdmin(resultSet.getBoolean("IS_ADMIN"));
+                abonent.setAddress(new AddressDAO().findEntityById(resultSet.getInt("ADDRESS_ID")));
                 abonents.add(abonent);
             }
         } catch (SQLException e) {
@@ -123,6 +126,7 @@ public class UserDAO implements BaseUserDAO{
             preparedStatement.setString(2,t.getLogin());
             preparedStatement.setString(3,t.getPassword());
             preparedStatement.setBoolean(4,t.isAdmin());
+            preparedStatement.setInt(5,t.getAddress().getId());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 ResultSet resultSet = preparedStatement.getGeneratedKeys();
@@ -142,7 +146,7 @@ public class UserDAO implements BaseUserDAO{
     }
 
     @Override
-    public void update(User country, int id, String name, String login, String password, boolean admin) throws DaoException {
+    public void update(User country, int id, String name, String login, String password, boolean admin, Address address) throws DaoException {
         if (country == null) return;
         try{
             connection = ConnectionPool.getConnection();
@@ -152,12 +156,14 @@ public class UserDAO implements BaseUserDAO{
             preparedStatement.setString(3,password);
             preparedStatement.setBoolean(4,country.isAdmin());
             preparedStatement.setInt(5,country.getId());
+            preparedStatement.setInt(6,country.getAddress().getId());
             int rowAffected = preparedStatement.executeUpdate();
             if (rowAffected == 1){
                 country.setName(name);
                 country.setLogin(login);
                 country.setPassword(password);
                 country.setAdmin(admin);
+                country.setAddress(address);
             }
         } catch (SQLException e){
             throw new DaoException(e);
@@ -168,7 +174,7 @@ public class UserDAO implements BaseUserDAO{
         }
     }
 
-    private List<User> loadFromResultSet(ResultSet resultSet) throws SQLException {
+    private List<User> loadFromResultSet(ResultSet resultSet) throws SQLException, DaoException {
         if (resultSet == null) return null;
 
         List<User> countries = new ArrayList<>();
@@ -179,6 +185,7 @@ public class UserDAO implements BaseUserDAO{
             country.setLogin(resultSet.getString(3));
             country.setPassword(resultSet.getString(4));
             country.setAdmin(resultSet.getBoolean(5));
+            country.setAddress(new AddressDAO().findEntityById(resultSet.getInt(6)));
             countries.add(country);
         }
         return countries;

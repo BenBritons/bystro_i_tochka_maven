@@ -1,5 +1,6 @@
 package by.fpmibsu.bystro_i_tochka.service;
 
+import by.fpmibsu.bystro_i_tochka.entity.Address;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,8 +17,8 @@ public class UserServiceImpl implements BaseUserService{
 
     private UserDAO dao = new UserDAO();
     @Override
-    public void createUser(String name, String login, String password) throws DaoException {
-        User user = new User(name,login,password);
+    public void createUser(String name, String login, String password, Address address, boolean isAdmin) throws DaoException {
+        User user = new User(isAdmin,name,login,password,0,address);
         dao.create(user);
         logger.log(Level.INFO, "created new user " + user.toString());
     }
@@ -53,8 +54,8 @@ public class UserServiceImpl implements BaseUserService{
     }
 
     @Override
-    public void update(User country, int id, String name, String login, String password, boolean admin) throws DaoException {
-        dao.update(country, id, name, login, password, admin);
+    public void update(User country, int id, String name, String login, String password, boolean admin, Address address) throws DaoException {
+        dao.update(country, id, name, login, password, admin, address);
         logger.log(Level.INFO, "user updated " + country.toString());
     }
 }

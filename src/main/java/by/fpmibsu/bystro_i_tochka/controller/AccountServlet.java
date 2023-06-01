@@ -31,14 +31,14 @@ public class AccountServlet extends HttpServlet {
         int id = 0;
         try {
             if(new UserServiceImpl().login(login,password)){
-                PrintWriter out= response.getWriter();
                 request.getSession().setAttribute("logined", true);
-                request.getSession().setAttribute("username", login);
                 ArrayList<User> users = new UserServiceImpl().findAll();
                 for (var tmp :
                         users) {
                     if (tmp.getLogin().equals(login) && tmp.getPassword().equals(password)) {
-                      id = tmp.getId();
+                        id = tmp.getId();
+                        request.getSession().setAttribute("user", tmp);
+                        break;
                     }
                 }
                 Order order = new Order(new UserDAO().findEntityById(id), 0,new Address(), new ArrayList<Food>(), new Date());
