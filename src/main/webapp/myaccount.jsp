@@ -76,10 +76,10 @@
         <h1 class="account-h1" >Мой аккаунт</h1>
         <div id="userInfo">
             <h2>Информация о пользователе</h2>
-            <p id="userName"><%=request.getAttribute("name")%></p>
-            <p id="userLogin"><%=request.getAttribute("login")%></p>
-            <p id="password"><%=request.getAttribute("password")%></p>
-            <p id="address"><%=request.getAttribute("address")%></p>
+            <p id="userName">Имя пользователя: <%=request.getAttribute("name")%></p>
+            <p id="userLogin">Ваш логин: <%=request.getAttribute("login")%></p>
+            <p id="password">Ваш пароль: <%=request.getAttribute("password")%></p>
+            <p id="address">Ваш адрес: <%=request.getAttribute("address")%></p>
           </div>
         <button style="margin-top: 250px" class="btn btn-danger">Выйти из аккаунта</button>
     </div>
