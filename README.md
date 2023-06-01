@@ -22,3 +22,15 @@
 
 ## Use case diagram
 ![Use case diagram](src/main/webapp/images/usecasediagram.jpg)
+
+## ER-модель базы данных
+![ER Model](src/main/webapp/images/ermodel.jpg)
+
+## Диаграммы классов
+![Entity](src/main/webapp/images/entity.jpg)
+![Dao](src/main/webapp/images/dao.jpg)
+![Service](src/main/webapp/images/service.jpg)
+![Servlet](src/main/webapp/images/servlet.jpg)
+
+## Диаграмма компонентов и диаграмма развертывания
+![Diagram](src/main/webapp/images/diagram.jpg)
