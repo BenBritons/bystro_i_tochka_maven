@@ -27,13 +27,13 @@
 ![ER Model](src/main/webapp/images/ermodel.jpg)
 
 ## 5. Диаграммы классов
-#Entity
+##Entity
 ![Entity](src/main/webapp/images/entity.jpg)
-#Dao
+##Dao
 ![Dao](src/main/webapp/images/dao.jpg)
-#Service
+##Service
 ![Service](src/main/webapp/images/service.jpg)
-#Servlet
+##Servlet
 ![Servlet](src/main/webapp/images/servlet.jpg)
 
 ## Диаграмма компонентов и диаграмма развертывания
