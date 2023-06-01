@@ -21,3 +21,4 @@
 -  JavaScript
 
 ## Use case diagram
+![Use case diagram](images/usecasediagram.jpg)
