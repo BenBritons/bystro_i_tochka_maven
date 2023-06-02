@@ -42,10 +42,10 @@ Entity
 ![Entity](docs/entity.jpg)
 Dao
 <br>
-![Dao](docs/dao1.jpg)
+![Dao](docs/dao1.png)
 Service
 <br>
-![Service](docs/service1.jpg)
+![Service](docs/service1.png)
 <br>
 Servlet
 <br>
